@@ -4,7 +4,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 const Categories = ({categories,activeCategory , setActiveCategory}) => {
     return (
-        <div className="relative border w-full max-w-xs">
+        <div className="relative w-full max-w-xs">
             <select
                 value={activeCategory}
                 onChange={(e) => { setActiveCategory(e.target.value) }}

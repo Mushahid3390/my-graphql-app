@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Search from "./Search";
 import Categories from "./Categories";
+import Link from "next/link";
 
 
 const ProductCards = () => {
@@ -81,7 +82,7 @@ const ProductCards = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 query: `
-         query GetProducts {
+         query  {
           categories
           products(limit: 30) {
             products {
@@ -180,6 +181,7 @@ const ProductCards = () => {
         </div>)}
        {
         products && (
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {products?.map((product) => {
                 const discountedPrice = (
@@ -189,10 +191,11 @@ const ProductCards = () => {
                 const reviewCount = product.reviews?.length || 0;
 
                 return (
-                  <div
-                    key={product.id}
-                    className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+                  <Link
+                    href={`/products/${product.id}`}
+                    className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 block"
                   >
+                 
                     {/* Image Container */}
                     <div className="relative h-64 overflow-hidden bg-gray-100">
                       <img
@@ -202,7 +205,7 @@ const ProductCards = () => {
                       />
 
                       {product.discountPercentage > 0 && (
-                        <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                        <div className="absolute top-4 right-4 bg-red-100 text-red-400 text-xs font-bold px-3 py-1 rounded-full shadow">
                           -{product.discountPercentage}%
                         </div>
                       )}
@@ -254,7 +257,7 @@ const ProductCards = () => {
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
