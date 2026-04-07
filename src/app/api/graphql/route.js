@@ -86,7 +86,8 @@ const schema = createSchema({
               return data.products || [];
           },
           categories: async () => {
-            return await fetchFromDummyJSON(`/products/categories`)
+            const data = await fetchFromDummyJSON(`/products/categories`)
+            return data?.map((cat)=> cat.slug);
           },
             productsByCategory: async (_,{category}) => {
             const data = await fetchFromDummyJSON(`/products/category/${category}`);
